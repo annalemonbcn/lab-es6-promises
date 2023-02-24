@@ -48,7 +48,7 @@ getInstruction(
                   "mashedPotatoes", 4,
                   (step) => {
                     document.querySelector("#mashedPotatoes").innerHTML += `<li>${step}</li>`;
-                    document.querySelector("#mashedPotatoes").innerHTML += `<li>Mashed potatoes are ready!</li>`;
+                    document.querySelector("#mashedPotatoes").innerHTML += `<li>Mashed potatoes are ready!</li>`; // -> Poner este paso aquí?
                   },
                   (err) => console.log(err)
                 );
