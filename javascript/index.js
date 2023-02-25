@@ -28,6 +28,8 @@
 
 
 // Iteration 1 - using callbacks
+
+
 getInstruction(
   "mashedPotatoes", 0,
   (step) => {
@@ -70,6 +72,7 @@ getInstruction(
  * PROMISE ALL
  */
 // -> Works but not codepending
+/*
 const p1 = obtainInstruction('steak', 0);
 const p2 = obtainInstruction('steak', 1);
 const p3 = obtainInstruction('steak', 2);
@@ -85,11 +88,56 @@ Promise.all([p1, p2, p3, p4, p5, p6, p7, p8]).then((steps) => {
   console.log("Values", steps);
   console.log(steps[0]);
 });
+*/
+
 
 /**
  * CHAINED PROMISES
  */
 // -> NOT WORKING but i don't know why
+obtainInstruction('steak', 0)
+  .then((value0) => {
+    console.log(`value0: ${value0}`);
+    document.querySelector("#steak").innerHTML += `<li>${value0}</li>`;
+    return obtainInstruction('steak', 1)
+  })
+  .then((value1) => {
+    console.log(`value1: ${value1}`);
+    document.querySelector("#steak").innerHTML += `<li>${value1}</li>`;
+    return obtainInstruction('steak', 2)
+  })
+  .then((value2) => {
+    console.log(`value2: ${value2}`);
+    document.querySelector("#steak").innerHTML += `<li>${value2}</li>`;
+    return obtainInstruction('steak', 3)
+  })
+  .then((value3) => {
+    console.log(`value3: ${value3}`);
+    document.querySelector("#steak").innerHTML += `<li>${value3}</li>`;
+    return obtainInstruction('steak', 4)
+  })
+  .then((value4) => {
+    console.log(`value4: ${value4}`);
+    document.querySelector("#steak").innerHTML += `<li>${value4}</li>`;
+    return obtainInstruction('steak', 5)
+  })
+  .then((value5) => {
+    console.log(`value5: ${value5}`);
+    document.querySelector("#steak").innerHTML += `<li>${value5}</li>`;
+    return obtainInstruction('steak', 6)
+  })
+  .then((value6) => {
+    console.log(`value6: ${value6}`);
+    document.querySelector("#steak").innerHTML += `<li>${value6}</li>`;
+    return obtainInstruction('steak', 7)
+  })
+  .then((value7) => {
+    console.log(`value7: ${value7}`);
+    document.querySelector("#steak").innerHTML += `<li>${value7}</li>`;
+  })
+
+
+
 // obtainInstruction('steak', 0)
 //   .then((step0) => {
 //     //step0 -> PromiseResult
