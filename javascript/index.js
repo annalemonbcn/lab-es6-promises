@@ -28,8 +28,6 @@
 
 
 // Iteration 1 - using callbacks
-
-
 getInstruction(
   "mashedPotatoes", 0,
   (step) => {
@@ -51,6 +49,7 @@ getInstruction(
                   (step) => {
                     document.querySelector("#mashedPotatoes").innerHTML += `<li>${step}</li>`;
                     document.querySelector("#mashedPotatoes").innerHTML += `<li>Mashed potatoes are ready!</li>`; // -> Poner este paso aquí?
+                    document.querySelector('#mashedPotatoesImg').removeAttribute('hidden');
                   },
                   (err) => console.log(err)
                 );
@@ -99,10 +98,53 @@ obtainInstruction('steak', 0)
   })
   .then((value7) => {
     document.querySelector("#steak").innerHTML += `<li>${value7}</li>`;
+    document.querySelector("#steak").innerHTML += `<li>Steak is ready!</li>`; // -> Poner este paso aquí?
+    document.querySelector('#steakImg').removeAttribute('hidden');
   })
 
 // Iteration 3 using async/await
-// ...
+async function makeBroccoli() {
+  try {
+    document.querySelector('#broccoli').innerHTML += `<li>${await obtainInstruction('broccoli', 0)}</li>`;
+    document.querySelector('#broccoli').innerHTML += `<li>${await obtainInstruction('broccoli', 1)}</li>`;
+    document.querySelector('#broccoli').innerHTML += `<li>${await obtainInstruction('broccoli', 2)}</li>`;
+    document.querySelector('#broccoli').innerHTML += `<li>${await obtainInstruction('broccoli', 3)}</li>`;
+    document.querySelector('#broccoli').innerHTML += `<li>${await obtainInstruction('broccoli', 4)}</li>`;
+    document.querySelector('#broccoli').innerHTML += `<li>${await obtainInstruction('broccoli', 5)}</li>`;
+    document.querySelector('#broccoli').innerHTML += `<li>${await obtainInstruction('broccoli', 6)}</li>`;
+    document.querySelector('#broccoli').innerHTML += `<li>Broccoli is ready!</li>`;
+    document.querySelector('#broccoliImg').removeAttribute('hidden');
+
+  } catch (err) {
+    console.error("Something went wrong: ", err);
+  }
+}
+ 
+makeBroccoli();
 
 // Bonus 2 - Promise all
-// ...
+const brusselsSproutsPromises = [];
+
+brusselsSproutsPromises.push(obtainInstruction('brusselsSprouts', 0));
+brusselsSproutsPromises.push(obtainInstruction('brusselsSprouts', 1));
+brusselsSproutsPromises.push(obtainInstruction('brusselsSprouts', 2));
+brusselsSproutsPromises.push(obtainInstruction('brusselsSprouts', 3));
+brusselsSproutsPromises.push(obtainInstruction('brusselsSprouts', 4));
+brusselsSproutsPromises.push(obtainInstruction('brusselsSprouts', 5));
+brusselsSproutsPromises.push(obtainInstruction('brusselsSprouts', 6));
+brusselsSproutsPromises.push(obtainInstruction('brusselsSprouts', 7));
+
+// console.log(brusselsSproutsPromises);
+Promise.all(brusselsSproutsPromises)
+  .then(data => {
+    console.log(data);
+    data.forEach(step => {
+      document.querySelector('#brusselsSprouts').innerHTML += `<li>${step}</li>`; // -> Demasiado rápido?
+    })
+    // Add final info
+    document.querySelector('#brusselsSprouts').innerHTML += `<li>Brussels sprouts are ready!</li>`;
+    document.querySelector('#brusselsSproutsImg').removeAttribute('hidden');
+  })
+  .catch(err => {
+    console.error(err);
+  })
